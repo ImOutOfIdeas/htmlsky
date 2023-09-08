@@ -1,6 +1,6 @@
-import { index } from "./index.page.ts";
-import { post_page } from "./post.page.ts";
-import { actor_page } from "./actor.page.ts";
+import { index } from "./pages/index.page.ts";
+import { post_page } from "./pages/post.page.ts";
+import { actor_page } from "./pages/actor.page.ts";
 
 import { get_actor } from "./actor.ts";
 import { get_post } from "./post.ts";

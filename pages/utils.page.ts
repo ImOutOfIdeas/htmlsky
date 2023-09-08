@@ -1,4 +1,4 @@
-import { Embed } from "./bsky.d.ts";
+import { Embed } from "../bsky.d.ts";
 
 export function styles (): string {
     return `

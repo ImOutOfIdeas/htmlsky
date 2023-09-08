@@ -1,6 +1,6 @@
-import { html_headers } from "./utils.ts";
+import { html_headers } from "../utils.ts";
 import { styles, get_embed } from "./utils.page.ts";
-import { get_post } from "./post.ts";
+import { get_post } from "../post.ts";
 
 export async function post_page(actor: string, rkey: string, pathname: string): Promise<Response> {
     const post = await get_post(actor, rkey);

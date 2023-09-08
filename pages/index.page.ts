@@ -1,4 +1,4 @@
-import { html_headers } from "./utils.ts";
+import { html_headers } from "../utils.ts";
 
 export function index(): Response {
   const html = `
@@ -45,7 +45,7 @@ export function index(): Response {
     <p>Check out a <i>quote</i> post (with a script in it): <a href="/profile/jordanreger.com/post/3k6nvzasujl2v">quote post (with a script in it)</a></p>
     <p>Check out an image post with an alt text on it: <a href="profile/jordanreger.com/post/3k6nxt74trf2o">image post with alt text</a></p>
     <p>This will not only allow people to view Bluesky posts from an embed but will also allow people with slow internet or no-JS clients to view posts. Mention me in a post if you've got any questions or comments! <a href="https://bsky.app/profile/jordanreger.com">@jordanreger.com</a></p>
-    <p>P.S. it's open source: <a href="https://dash.deno.com/playground/bsky">dash.deno.com/playground/bsky</a></p>
+    <p>Source: <a href="https://git.sr.ht/~jordanreger/bsky">git.sr.ht/~jordanreger/bsky</a></p>
     <hr/>
     <p>Built by <a href="https://jordanreger.com">Jordan Reger</a>.</p>
   </body>

@@ -74,9 +74,11 @@ export function get_embed (embed: Embed, embed_type: string): string | boolean {
     } else if (embed_type === "external") {
         res = `
         <a href="${embed.uri}" style="color: inherit; text-decoration: inherit;">
-        <div style="border: 1px solid black; margin-bottom: 1em; padding-bottom: 0.5em;">
-            <h3>${embed.title}</h3>
-            <p>${embed.description}</p>
+        <div style="border: 1px solid black; margin-bottom: 1em;">
+            <div style="margin: 1em">
+                <h3>${embed.title}</h3>
+                <p>${embed.description}</p>
+            </div>
         </div>
         </a>
         `;

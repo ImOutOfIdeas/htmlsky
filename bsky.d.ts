@@ -10,7 +10,7 @@ interface Post {
   rkey: string,
   user: Actor,
   text: string,
-  embed?: External | Post | Image,
+  embed?: External | Post | Array<Image>,
   embed_type?: string,
   createdAt: string,
 }

@@ -9,7 +9,7 @@ a bluesky html frontend
 - [x] text posts
 - [x] images
   - [x] alt text dropdown
-  - [ ] grid
+  - [x] multiple image support
 - [x] embeds
   - [x] text
   - [x] image

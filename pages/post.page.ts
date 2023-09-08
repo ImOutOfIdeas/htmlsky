@@ -1,10 +1,29 @@
-import { html_headers } from "../utils.ts";
+import { html_headers, error_headers } from "../utils.ts";
 import { styles, get_embed } from "./utils.page.ts";
 import { get_post } from "../post.ts";
 
 export async function post_page(actor: string, rkey: string, pathname: string): Promise<Response> {
     const post = await get_post(actor, rkey);
     const embed = get_embed(post.embed, post.embed_type);
+
+    const error_html = `
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no" />
+    <title>Post not found</title>
+    <meta name="theme-color" content="#0084ff">
+    ${styles()}
+    </head>
+    <body>
+    <h1>Post not found</h1>
+    <p style="word-break: break-word">${post.message}</p>
+    <footer style="position: relative; bottom: 0;">
+    <hr/>
+    <p style="float: right; margin: 0;"><a href="/">bsky.html</a></p>
+    </body>
+    `;
+
+    if (post.error) return new Response(error_html, error_headers);
 
     const html = `
     <head>

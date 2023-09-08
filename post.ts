@@ -3,9 +3,10 @@ import { get_handle, get_did, sanitize, get_embedded_post } from "./utils.ts";
 import { get_actor } from "./actor.ts";
 
 export async function get_post (handle: string, rkey: string): Post {
+  
   const is_did: boolean = handle.includes("did:");
 
-  let did;
+  let did: string;
   if (is_did) {
     did = handle;
     handle = await get_handle(handle);
@@ -50,11 +51,17 @@ export async function get_post (handle: string, rkey: string): Post {
   // image embed
   else if (embed_type?.includes("images")) {
     embed_type = "images";
-    embed.link = `https://av-cdn.bsky.app/img/feed_fullsize/plain/`
-    + did + "/" +
-    res.value.embed.images[0].image.ref["$link"]
-    + `@jpeg`;
-    embed.alt = res.value.embed.images[0].alt ? res.value.embed.images[0].alt : false;
+    const images: Array<Image> = [];
+    
+    res.value.embed.images.forEach((image: Image) => {
+      const img: Image = {
+        link: `https://av-cdn.bsky.app/img/feed_fullsize/plain/${did}/${image.image.ref["$link"]}@jpeg`,
+        alt: image.alt ? image.alt : false,
+      };
+      images.push(img);
+    });
+
+    embed.images = images;
   }
   
   if (embed.length === 0) {

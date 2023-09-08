@@ -51,3 +51,10 @@ export const json_headers = {
     "Content-Type": "application/json"
   }
 };
+
+export const error_headers = {
+  headers: {
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  status: 404
+}

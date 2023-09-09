@@ -22,6 +22,7 @@ export async function get_handle (did: string) {
 }
 
 export function get_embedded_post (uri: string) {
+  if (uri === undefined) return;
   const split = uri.replace("at://", "").split("/"),
   did = split[0], rkey = split[2];
   const post = get_post(did, rkey);

@@ -1,5 +1,5 @@
 import { Post, Image, External } from "./bsky.d.ts";
-import { get_handle, get_did, sanitize, get_embedded_post } from "./utils.ts";
+import { get_handle, get_did, get_embedded_post, sanitize } from "./utils.ts";
 import { get_actor } from "./actor.ts";
 
 export async function get_post (handle: string, rkey: string): Post {

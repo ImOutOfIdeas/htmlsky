@@ -1,4 +1,4 @@
-import { html_headers, replace_url, error_headers } from "../utils.ts";
+import { html_headers, error_headers, format } from "../utils.ts";
 import { styles } from "./utils.page.ts";
 import { get_actor } from "../actor.ts";
 
@@ -44,7 +44,7 @@ export async function actor_page(actor: string, pathname: string): Promise<Respo
     </div>
     <h1 style="margin-bottom: 0;">${user.name}</h1>
     <p style="margin-top: 0;">@${user.handle}</p>
-    <p style="white-space: pre-line">${replace_url(user.description)}</p>
+    <p style="white-space: pre-line">${format(user.description)}</p>
     <footer style="position: relative; bottom: 0; margin-top: 2em; margin-bottom: 1em;">
     <hr/>
     <p style="float: left; margin: 0;"><a href="https://bsky.app${pathname}">View on Bluesky</a></p>

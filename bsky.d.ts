@@ -25,3 +25,11 @@ interface Image {
   link: string,
   alt?: string,
 }
+
+interface Facet {
+  index: {
+    byteStart: number,
+    byteEnd: number,
+  },
+  features: Array<object>,
+}

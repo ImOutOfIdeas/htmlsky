@@ -1,4 +1,5 @@
 import { Embed } from "../bsky.d.ts";
+import { format } from "../utils.ts";
 
 export function styles (): string {
     return `
@@ -71,7 +72,7 @@ export function get_embed (embed: Embed, embed_type: string): string | boolean {
         image.alt ?
         `<details style="margin-bottom: 1em;">
         <summary>alt text</summary>
-        <p>${image.alt}</p>
+        <p>${format(image.alt)}</p>
         </details>` : ``
         }
         `).join("")}

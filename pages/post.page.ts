@@ -1,4 +1,4 @@
-import { html_headers, error_headers } from "../utils.ts";
+import { html_headers, error_headers, format } from "../utils.ts";
 import { styles, get_embed } from "./utils.page.ts";
 import { get_post } from "../post.ts";
 
@@ -47,7 +47,7 @@ export async function post_page(actor: string, rkey: string, pathname: string): 
             <p style="margin-top: 0;">@${post.user.handle}</p>
         </div>
     </div>
-    <p style="clear: both;">${post.text}</p>
+    <p style="clear: both;">${format(post.text)}</p>
     ${embed ? embed : ""}
     <time datetime="${post.createdAt}" style="margin-top: 1em;">${new Date(post.createdAt).toLocaleString()} UTC</time>
     <footer style="position: relative; bottom: 0;">

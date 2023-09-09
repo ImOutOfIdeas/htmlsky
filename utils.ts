@@ -1,4 +1,6 @@
 import { get_post } from "./post.ts";
+import { Facet } from "./bsky.d.ts";
+const RichText = await import("https://cdn.skypack.dev/@atproto/api").then(d => d.__moduleExports.RichText);
 
 export async function get_did (handle: string) {
   const res = await fetch(`https://bsky.social/xrpc/com.atproto.identity.resolveHandle`
@@ -38,6 +40,31 @@ export function sanitize (text: string) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+export function format (text: string) {
+  // sanitize
+  text = text.replaceAll("http://", "").replaceAll("https://", "");
+
+  // find and replace urls
+  const rt = new RichText({ text: text });
+  rt.detectFacetsWithoutResolution();
+
+  if (rt.facets !== undefined) {
+    rt.facets.forEach((link: Facet) => {
+      if (link.features[0]["$type"].includes("#link")) {
+        const sub = link.features[0].uri;
+        const sub_no = sub.replace("http://", "").replace("https://", "");
+        const replace_link = `<a href='${sub}'>${sub_no}</a>`;
+        text = text.replaceAll(sub_no, replace_link);
+      } else if (link.features[0]["$type"].includes("#")) {
+        const handle = link.features[0].did;
+        text = text.replaceAll(`@${handle}`, `<a href='/profile/${handle}'>@${handle}</a>`);
+      }
+    })
+  }
+
+  return text;
 }
 
 export const html_headers = {

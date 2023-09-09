@@ -18,22 +18,22 @@ export async function get_actor (handle: string): Actor {
   if (res.error) return res;
 
   const record = res.records[0];
-  const avatar_ref = record.value.avatar.ref["$link"];
-  const banner_ref = record.value.banner.ref["$link"];
 
   const avatar = record.value.avatar ?
-  `https://av-cdn.bsky.app/img/avatar/plain/${did}/${avatar_ref}@jpeg` :
-  "https://placehold.jp/0084ff/ffffff/500x500.jpg?text=user";
+  `https://av-cdn.bsky.app/img/avatar/plain/${did}/${record.value.avatar.ref["$link"]}@jpeg` :
+  "/resources/avatar.png";
 
   const banner = record.value.banner ?
-  `https://av-cdn.bsky.app/img/banner/plain/${did}/${banner_ref}@jpeg` :
-  "https://placehold.jp/0084ff/0084ff/3000x1000.jpg";
+  `https://av-cdn.bsky.app/img/banner/plain/${did}/${record.value.banner.ref["$link"]}@jpeg` :
+  "/resources/banner.png";
 
   const name = record.value.displayName ? sanitize(record.value.displayName) : handle;
 
   let description;
-  if (record.value.description) {
+  if (record.value.description !== "") {
     description = sanitize(record.value.description);
+  } else {
+    description = "";
   }
 
   const actor: Actor = {

@@ -31,6 +31,13 @@ Deno.serve({ port: 80 }, async (req: Request) => {
         return new Response(JSON.stringify(post, null, 2), json_headers);
     }
 
+    if (pathname === "/resources/avatar.png") {
+        return new Response(await Deno.readFile("./resources/avatar.png"), { headers: { "Content-Type": "image/png" } });
+    }
+    if (pathname === "/resources/banner.png") {
+        return new Response(await Deno.readFile("./resources/banner.png"), { headers: { "Content-Type": "image/png" } });
+    }
+
     const split = pathname.split("/");
     const actor = split[2], rkey = split[4];
 

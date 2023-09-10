@@ -43,7 +43,7 @@ export function sanitize (text: string) {
     .replace(/'/g, "&#039;");
 }
 
-export function format (text: string) {
+export function format (text: string, facets: Array<Facet>) {
   // sanitize
   text = text.replaceAll("http://", "").replaceAll("https://", "");
 
@@ -52,10 +52,10 @@ export function format (text: string) {
   rt.detectFacetsWithoutResolution();
 
   if (rt.facets !== undefined) {
-    rt.facets.forEach((link: Facet) => {
+    rt.facets.forEach((link: Facet, i: number) => {
       if (link.features[0]["$type"].includes("#link")) {
-        const sub = link.features[0].uri;
-        const sub_no = sub.replace("http://", "").replace("https://", "");
+        const sub = facets[i].features[0].uri;
+        const sub_no = link.features[0].uri.replace("http://", "").replace("https://", "");
         const replace_link = `<a href='${sub}'>${sub_no}</a>`;
         text = text.replaceAll(sub_no, replace_link);
       } else if (link.features[0]["$type"].includes("#")) {

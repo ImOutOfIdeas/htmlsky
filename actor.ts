@@ -19,13 +19,23 @@ export async function get_actor (handle: string): Actor {
 
   const record = res.records[0];
 
-  const avatar = record.value.avatar ?
-  `https://av-cdn.bsky.app/img/avatar/plain/${did}/${record.value.avatar.ref["$link"]}@jpeg` :
-  "/resources/avatar.png";
+  let avatar, banner;
 
-  const banner = record.value.banner ?
-  `https://av-cdn.bsky.app/img/banner/plain/${did}/${record.value.banner.ref["$link"]}@jpeg` :
-  "/resources/banner.png";
+  if (record.value.avatar) {
+    avatar = record.value.avatar.ref ?
+    `https://av-cdn.bsky.app/img/avatar/plain/${did}/${record.value.avatar.ref["$link"]}@jpeg` :
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Minecraft_missing_texture_block.svg/2048px-Minecraft_missing_texture_block.svg.png";
+  } else {
+    avatar = "/resources/avatar.png";
+  }
+
+  if (record.value.banner) {
+    banner = record.value.banner.ref ?
+    `https://av-cdn.bsky.app/img/banner/plain/${did}/${record.value.banner.ref["$link"]}@jpeg` :
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Minecraft_missing_texture_block.svg/2048px-Minecraft_missing_texture_block.svg.png";
+  } else {
+    banner = "/resources/banner.png";
+  }
 
   const name = record.value.displayName ? sanitize(record.value.displayName) : handle;
 

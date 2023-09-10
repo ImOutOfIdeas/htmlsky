@@ -28,7 +28,7 @@ export async function get_post (handle: string, rkey: string): Post {
 
   let embed: External | Post | Image = {};
   let embed_type;
-  
+
   if (res.value.embed) {
     embed_type = res.value.embed["$type"];
   }
@@ -78,6 +78,8 @@ export async function get_post (handle: string, rkey: string): Post {
     embed: embed,
     embed_type: embed_type,
     createdAt: created_at,
+    facets: res.value.facets,
+    langs: res.value.langs,
   };
 
   return post;

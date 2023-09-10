@@ -13,6 +13,8 @@ interface Post {
   embed?: External | Post | Array<Image>,
   embed_type?: string,
   createdAt: string,
+  facets?: Array<Facet>,
+  langs: Array<string>,
 }
 
 interface External {

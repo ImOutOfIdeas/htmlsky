@@ -1,9 +1,14 @@
 import { html_headers, error_headers, format } from "../utils.ts";
 import { styles } from "./utils.page.ts";
 import { get_actor } from "../actor.ts";
+const RichText = await import("https://cdn.skypack.dev/@atproto/api").then(d => d.__moduleExports.RichText);
 
 export async function actor_page(actor: string, pathname: string): Promise<Response> {
     const user = await get_actor(actor);
+
+    // find and replace urls
+    const rt = new RichText({ text: user.description });
+    rt.detectFacetsWithoutResolution();
 
     const error_html = `
     <head>
@@ -39,12 +44,12 @@ export async function actor_page(actor: string, pathname: string): Promise<Respo
     </head>
     <body>
     <div style="position: relative; margin-bottom: 2.5rem;">
-        <img src="${user.banner}" alt="banner" style="position: relative;" />
+        <img src="${user.banner}" alt="banner" style="position: relative; aspect-ratio: 3/1;" />
         <img src="${user.avatar}" alt="avatar" style="width: 5em; border-radius: 50%; position: absolute; left: 1em; bottom: -2.5em;" />
     </div>
     <h1 style="margin-bottom: 0;">${user.name}</h1>
     <p style="margin-top: 0;">@${user.handle}</p>
-    <p style="white-space: pre-line">${format(user.description)}</p>
+    <p style="white-space: pre-line">${format(user.description, rt.facets)}</p>
     <footer style="position: relative; bottom: 0; margin-top: 2em; margin-bottom: 1em;">
     <hr/>
     <p style="float: left; margin: 0;"><a href="https://bsky.app${pathname}">View on Bluesky</a></p>

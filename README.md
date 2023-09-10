@@ -19,3 +19,6 @@ a bluesky html frontend
 - [ ] threads
   - [ ] user
   - [ ] post
+
+## api
+if you want to get a useful representation of either an account or a post, instead of replacing [bsky.app](https://bsky.app) with [bsky.deno.dev](https://bsky.deno.dev), replace it with [bsky.deno.dev/json/](https://bsky.deno.dev/json/) and you'll receive a JSON object representing the corresponding account/post.

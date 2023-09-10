@@ -11,24 +11,17 @@ Deno.serve({ port: 80 }, async (req: Request) => {
     if (pathname === "/favicon.ico") return Response.redirect("https://bsky.app/static/favicon-32x32.png", 301);
     if (pathname === "/" || pathname === "/index.html") return index();
 
-    if (pathname === "/api/actor") {
-        const params = url.searchParams;
-        const handle = params.get("handle")!;
+    if (pathname.includes("/json/")) {
+        const split = pathname.split("/");
+        const actor = split[3], rkey = split[5];
 
-        if (handle) return new Response("?handle=${handle}", json_headers);
-        
-        const actor = await get_actor(handle);
-        return new Response(JSON.stringify(actor, null, 2), json_headers);
-    }
-
-    if (pathname === "/api/post") {
-        const params = url.searchParams;
-        const handle = params.get("handle")!, rkey = params.get("rkey")!;
-
-        if (!handle || !rkey) return new Response("?handle=${handle}", json_headers);
-        
-        const post = await get_post(handle, rkey);
-        return new Response(JSON.stringify(post, null, 2), json_headers);
+        if (actor && rkey && split.length === 6) {
+            const post = await get_post(actor, rkey);
+            return new Response(JSON.stringify(post, null, 2), json_headers);
+        } else if (actor && split.length === 4) {
+            const user = await get_actor(actor);
+            return new Response(JSON.stringify(user, null, 2), json_headers);
+        } else return new Response(JSON.stringify({ error: "not found" }), json_headers);
     }
 
     if (pathname === "/resources/avatar.png") {

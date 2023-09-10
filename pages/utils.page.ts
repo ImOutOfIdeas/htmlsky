@@ -72,7 +72,7 @@ export function get_embed (embed: Embed, embed_type: string): string | boolean {
         image.alt ?
         `<details style="margin-bottom: 1em;">
         <summary>alt text</summary>
-        <p>${format(image.alt)}</p>
+        <p>${image.alt}</p>
         </details>` : ``
         }
         `).join("")}

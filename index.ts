@@ -11,6 +11,17 @@ Deno.serve({ port: 80 }, async (req: Request) => {
     if (pathname === "/favicon.ico") return Response.redirect("https://bsky.app/static/favicon-32x32.png", 301);
     if (pathname === "/" || pathname === "/index.html") return index();
 
+    if (pathname.includes("/thread/")) {
+        const split = pathname.split("/");
+        const actor = split[3];
+
+        if (actor && split.length === 4) {
+            const thread = await fetch().then(res => res.json());
+            
+            return new Response(JSON.stringify(thread, null, 2), json_headers);
+        } else return new Response(JSON.stringify({ error: "not found" }), json_headers);
+    }
+
     if (pathname.includes("/json/")) {
         const split = pathname.split("/");
         const actor = split[3], rkey = split[5];

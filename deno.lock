@@ -2,6 +2,7 @@
   "version": "2",
   "remote": {
     "https://cdn.skypack.dev/-/@atproto/api@v0.6.10-kPlphXk6F4eUlg6GiC8S/dist=es2019,mode=imports/optimized/@atproto/api.js": "4848ab64346f41ebd6bbdea336301143ce591f1da669d01fb6025a126511eebd",
+    "https://cdn.skypack.dev/-/@atproto/api@v0.6.12-Qv0K00GF99KsKabKw4uA/dist=es2019,mode=imports/optimized/@atproto/api.js": "4a7a58bd9f285b3e5d375bb5482bb084a415910e1fc1effef6058b7f147eae45",
     "https://cdn.skypack.dev/@atproto/api": "7325520ee1a854a8eccbdec54e37cbc5bd52dc7bc351f864180d3cbcc13a6bb1",
     "https://esm.sh/@atproto/api@0.6.4": "2b874514df10c980bbf2fe99a2344a31af6713c39c7e8b1d0a69a5e3eed73b77",
     "https://esm.sh/v131/@atproto/api@0.6.4/denonext/api.mjs": "10cca38712927d4aad9954feb6f80de0aef92c7018f0ae82268e6c2d4bda44e3"

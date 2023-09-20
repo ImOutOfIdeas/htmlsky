@@ -34,9 +34,14 @@ export async function get_post (handle: string, rkey: string): Post {
   }
 
   // post embed
-  if (embed_type?.includes("record")) {
+  if (embed_type?.includes("record") && !embed_type?.includes("recordWithMedia")) {
     embed_type = "record";
     const post: Post = await get_embedded_post(res.value.embed.record.uri);
+    embed = post;
+  }
+  else if (embed_type?.includes("recordWithMedia")) {
+    embed_type = "recordWithMedia";
+    const post: Post = await get_embedded_post(res.value.embed.record.record.uri);
     embed = post;
   }
 
@@ -64,7 +69,7 @@ export async function get_post (handle: string, rkey: string): Post {
     embed.images = images;
   }
   
-  if (embed.length === 0) {
+  if (res.value.embed?.length === 0) {
     embed = null;
     embed_type = null;
   }

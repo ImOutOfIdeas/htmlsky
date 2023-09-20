@@ -31,6 +31,7 @@ export function index(): Response {
     <li>post with multiple language tags: <a href="/profile/jordanreger.com/post/3k6z7qr7qma2h">@jordanreger.com/3k6z7qr7qma2h</a></li>
     </ul>
     <p>This will not only allow people to view Bluesky posts from an embed but will also allow people with slow internet or no-JS clients to view posts. Mention me in a post if you've got any questions or comments! <a href="https://bsky.deno.dev/profile/jordanreger.com">@jordanreger.com</a></p>
+    <p>If you find a bug, please email it to <a href="mailto:~jordanreger/bsky@todo.sr.ht">~jordanreger/bsky@todo.sr.ht</a>. Thanks!</p>
     <hr/>
     <p>Built by <a href="https://jordanreger.com">Jordan Reger</a> &#8212; <a href="https://sr.ht/~jordanreger/bsky">sr.ht/~jordanreger/bsky</a></p>
   </body>

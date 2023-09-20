@@ -47,7 +47,7 @@ export function get_embed (embed: Embed, embed_type: string): string | boolean {
 
     let res;
 
-    if (embed_type === "record") {
+    if (embed_type === "record" || embed_type === "recordWithMedia") {
         res = `
         <a href="/profile/${embed.user.handle}/post/${embed.rkey}" style="color: inherit; text-decoration: inherit;">
         <div style="border: 1px solid black; margin-bottom: 1em; padding-bottom: 0.5em;">

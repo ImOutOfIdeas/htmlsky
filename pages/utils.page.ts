@@ -5,10 +5,7 @@ export function styles (): string {
     return `
     <style>
     body {
-        position: relative;
         line-height: 1.2;
-        padding: 0 10px;
-        margin: 10px auto;
         max-width: 650px;
     }
 

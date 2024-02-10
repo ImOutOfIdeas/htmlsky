@@ -1,5 +1,5 @@
 import { Embed } from "../bsky.d.ts";
-import { format } from "../utils.ts";
+// import { format } from "../utils.ts";
 
 export function styles (): string {
     return `
@@ -7,6 +7,8 @@ export function styles (): string {
     body {
         line-height: 1.2;
         max-width: 650px;
+        padding: 0 10px;
+        margin: 10px auto;
     }
 
     img {

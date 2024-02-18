@@ -47,7 +47,8 @@ export async function actor_page(actor: string, pathname: string): Promise<Respo
         <img src="${user.avatar}" alt="avatar" style="width: 5em; border-radius: 50%; position: absolute; left: 1em; bottom: -2.5em;" />
     </div>
     <h1 style="margin-bottom: 0;">${user.name}</h1>
-    <p style="margin-top: 0;">@${user.handle}</p>
+    <p style="margin: auto 0;">@${user.handle}</p>
+    <p style="margin: 10px 0;"><b>${user.followers}</b> followers <b>${user.follows}</b> following <b>${user.posts}</b> posts</p>
     <p style="white-space: pre-line">${format(user.description, rt.facets)}</p>
     <footer style="position: relative; bottom: 0; margin-top: 2em; margin-bottom: 1em;">
     <hr/>

@@ -10,39 +10,40 @@ export async function get_actor (handle: string): Actor {
     did = await get_did(handle);
   }
 
-  const res = await fetch(`https://bsky.social/xrpc/com.atproto.repo.listRecords?repo=${did}&collection=app.bsky.actor.profile`)
+  const res = await fetch(`https://api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=${did}`)
     .then(res => res.json());
 
   if (res.error) return res;
 
-  const record = res.records[0];
+  const record = res;
 
   let avatar, banner;
 
-  if (record.value.avatar) {
-    avatar = record.value.avatar.ref ?
-    `https://av-cdn.bsky.app/img/avatar/plain/${did}/${record.value.avatar.ref["$link"]}@jpeg` :
+  if (record.avatar) {
+    avatar = record.avatar ?
+    record.avatar :
     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Minecraft_missing_texture_block.svg/2048px-Minecraft_missing_texture_block.svg.png";
   } else {
     avatar = "/resources/avatar.png";
   }
 
-  if (record.value.banner) {
-    banner = record.value.banner.ref ?
-    `https://av-cdn.bsky.app/img/banner/plain/${did}/${record.value.banner.ref["$link"]}@jpeg` :
+  if (record.banner) {
+    banner = record.banner ?
+    record.banner :
     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Minecraft_missing_texture_block.svg/2048px-Minecraft_missing_texture_block.svg.png";
   } else {
     banner = "/resources/banner.png";
   }
 
-  const name = record.value.displayName ? sanitize(record.value.displayName) : handle;
+  const name = record.displayName ? sanitize(record.displayName) : handle;
 
   let description;
-  if (record.value.description !== "") {
-    description = sanitize(record.value.description);
+  if (record.description !== "") {
+    description = sanitize(record.description);
   } else {
     description = "";
   }
+
 
   const actor: Actor = {
     avatar: avatar,
@@ -50,6 +51,9 @@ export async function get_actor (handle: string): Actor {
     name: name,
     description: description,
     handle: handle,
+    follows: record.followsCount,
+    followers: record.followersCount,
+    posts: record.postsCount,
   };
 
   return actor;

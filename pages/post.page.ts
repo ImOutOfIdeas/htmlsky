@@ -50,10 +50,11 @@ export async function post_page(actor: string, rkey: string, pathname: string): 
     <p style="clear: both;">${format(post.text, post.facets)}</p>
     ${embed ? embed : ""}
     <time datetime="${post.createdAt}" style="margin-top: 1em;">${new Date(post.createdAt).toLocaleString()} UTC</time> &#8212; ${post.langs?.map((lang: string) => `<span>${lang}</span>`)}
-    <footer style="position: relative; bottom: 0;">
+    <footer>
     <hr/>
-    <p style="float: left; margin: 0;"><a href="https://bsky.app${pathname}">View on Bluesky</a></p>
-    <p style="float: right; margin: 0;"><a href="/">bsky.html</a></p>
+    <p style="float: left; margin-top: 0;"><a href="https://bsky.app${pathname}">View on Bluesky</a></p>
+    <p style="float: right; margin-top: 0;"><a href="/">bsky.html</a></p>
+    </footer>
     </body>
     `;
     return new Response(html, html_headers);

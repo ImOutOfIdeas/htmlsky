@@ -1,41 +1,9 @@
 import { Embed } from "../bsky.d.ts";
-// import { format } from "../utils.ts";
-
-export function styles (): string {
-    return `
-    <style>
-    body {
-        line-height: 1.2;
-        max-width: 650px;
-        padding: 0 10px;
-        margin: 10px auto;
-    }
-
-    img {
-        padding: 10px 0;
-        position: initial;
-        max-width: 100%;
-    }
-
-    nav {
-        margin-bottom: 10px;
-    }
-
-    table, td, th {
-        border: 1px solid black;
-        padding: 0.5em;
-    }
-    table {
-        border-collapse: collapse;
-    }
-    </style>
-    `;
-}
 
 export function get_embed (embed: Embed, embed_type: string): string | boolean {
     if (embed?.error) {
         return `
-        <div style="border: 1px solid black; margin-bottom: 1em; padding-bottom: 0.5em;">
+        <div style="border: 1px solid; margin-bottom: 1em; padding-bottom: 0.5em;">
         <div style="margin-left: 1em;">
         <h1>Post not found</h1>
         <p style="word-break: break-word">${embed.message}</p>
@@ -49,7 +17,7 @@ export function get_embed (embed: Embed, embed_type: string): string | boolean {
     if (embed_type === "record" || embed_type === "recordWithMedia") {
         res = `
         <a href="/profile/${embed.user.handle}/post/${embed.rkey}" style="color: inherit; text-decoration: inherit;">
-        <div style="border: 1px solid black; margin-bottom: 1em; padding-bottom: 0.5em;">
+        <div style="border: 1px solid; margin-bottom: 1em; padding-bottom: 0.5em;">
             <div style="margin-bottom: 1em; margin-left: 1em;">
                 <img src="${embed.user.avatar}" alt="avatar" style="width: 2.5em; border-radius: 50%; float: left; margin-right: 1em; padding: 0;">
                 <div>
@@ -80,7 +48,7 @@ export function get_embed (embed: Embed, embed_type: string): string | boolean {
     } else if (embed_type === "external") {
         res = `
         <a href="${embed.uri}" style="color: inherit; text-decoration: inherit;">
-        <div style="border: 1px solid black; margin-bottom: 1em;">
+        <div style="border: 1px solid; margin-bottom: 1em;">
             <div style="margin: 1em">
                 <h3>${embed.title}</h3>
                 <p>${embed.description}</p>

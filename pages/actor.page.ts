@@ -1,5 +1,4 @@
 import { html_headers, error_headers, format } from "../utils.ts";
-import { styles } from "./utils.page.ts";
 import { get_actor } from "../actor.ts";
 const RichText = await import("https://cdn.skypack.dev/@atproto/api").then(d => d.__moduleExports.RichText);
 
@@ -16,7 +15,7 @@ export async function actor_page(actor: string, pathname: string): Promise<Respo
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no" />
     <title>Post not found</title>
     <meta name="theme-color" content="#0084ff">
-    ${styles()}
+    <link rel="stylesheet" href="/style.css">
     </head>
     <body>
     <h1>User not found</h1>
@@ -40,7 +39,7 @@ export async function actor_page(actor: string, pathname: string): Promise<Respo
     <meta property="og:image" content="${user.avatar}" />
     <meta property="og:description" content="${user.description}" />
     <meta name="theme-color" content="#0084ff">
-    ${styles()}
+    <link rel="stylesheet" href="/style.css">
     </head>
     <body>
     <div style="position: relative; margin-bottom: 2.5rem;">

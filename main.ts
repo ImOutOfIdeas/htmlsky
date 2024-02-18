@@ -1,4 +1,3 @@
-import { index } from "./pages/index.page.ts";
 import { post_page } from "./pages/post.page.ts";
 import { actor_page } from "./pages/actor.page.ts";
 
@@ -6,10 +5,17 @@ import { get_actor } from "./actor.ts";
 import { get_post } from "./post.ts";
 import { json_headers } from "./utils.ts";
 
-Deno.serve({ port: 8567 }, async (req: Request) => {
+Deno.serve(async (req: Request) => {
     const url = new URL(req.url), pathname = url.pathname;
     if (pathname === "/favicon.ico") return Response.redirect("https://bsky.app/static/favicon-32x32.png", 301);
-    if (pathname === "/" || pathname === "/index.html") return index();
+    if (pathname === "/style.css") {
+        const res = await Deno.readFile("./pages/style.css");
+        return new Response(res, { headers: { "content-type": "text/css" }});
+    }
+    if (pathname === "/" || pathname === "/index.html") {
+        const res = await Deno.readFile("./pages/index.html");
+        return new Response(res, { headers: { "content-type": "text/html" }})
+    };
 
     if (pathname.includes("/json/")) {
         const split = pathname.split("/");

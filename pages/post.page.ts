@@ -1,5 +1,5 @@
 import { html_headers, error_headers, format } from "../utils.ts";
-import { styles, get_embed } from "./utils.page.ts";
+import { get_embed } from "./utils.page.ts";
 import { get_post } from "../post.ts";
 
 export async function post_page(actor: string, rkey: string, pathname: string): Promise<Response> {
@@ -12,7 +12,7 @@ export async function post_page(actor: string, rkey: string, pathname: string): 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, shrink-to-fit=no" />
     <title>Post not found</title>
     <meta name="theme-color" content="#0084ff">
-    ${styles()}
+    <link rel="stylesheet" href="/style.css">
     </head>
     <body>
     <h1>Post not found</h1>
@@ -37,7 +37,7 @@ export async function post_page(actor: string, rkey: string, pathname: string): 
     <meta property="og:image" content="${post.image}" />
     <meta property="og:description" content="${post.text}" />
     <meta name="theme-color" content="#0084ff">
-    ${styles()}
+    <link rel="stylesheet" href="/style.css">
     </head>
     <body>
     <div style="margin-bottom: 1em;">

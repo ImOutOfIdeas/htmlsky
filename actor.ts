@@ -2,17 +2,15 @@ import { Actor } from "./bsky.d.ts";
 import { get_handle, get_did, sanitize } from "./utils.ts";
 
 export async function get_actor (handle: string): Actor {
-  const is_did = handle.includes("did:");
-
   let did;
-  if (is_did) {
+  if (handle.includes("did:")) {
     did = handle;
     handle = await get_handle(handle);
   } else {
     did = await get_did(handle);
   }
 
-  const res = await fetch(`https://bsky.social/xrpc/com.atproto.repo.listRecords?repo=${handle}&collection=app.bsky.actor.profile`)
+  const res = await fetch(`https://bsky.social/xrpc/com.atproto.repo.listRecords?repo=${did}&collection=app.bsky.actor.profile`)
     .then(res => res.json());
 
   if (res.error) return res;

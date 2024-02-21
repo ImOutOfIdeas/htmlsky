@@ -6,10 +6,10 @@
 	<article>
 		<div style="position:relative;margin-bottom:50px;">
 			<object data="{{.Banner}}" type="image/jpeg" style="position:relative;aspect-ratio:3/1;max-width:100%;">
-				<img src="http://raw.githubusercontent.com/jordanreger/htmlsky/archive/resources/banner.png" style="position:relative;aspect-ratio:3/1;max-width:100%;">
+				<img src="/banner.png" style="position:relative;aspect-ratio:3/1;max-width:100%;">
 			</object>
 			<object data="{{.Avatar}}" type="image/jpeg" style="width:100px;border-radius:50%;position:absolute;left:10px;bottom:-50px;">
-				<img src="http://raw.githubusercontent.com/jordanreger/htmlsky/archive/resources/avatar.png" style="width:100px;border-radius:50%;position:absolute;left:10px;bottom:-50px;">
+				<img src="/avatar.png" style="width:100px;border-radius:50%;position:absolute;left:10px;bottom:-50px;">
 			</object>
 		</div>
 		<h1 style="margin-bottom:0;">{{.DisplayName}}</h1>
@@ -28,7 +28,7 @@
 				<a href="https://htmlsky.app/profile/{{.Post.Author.Handle}}/post/{{.Post.RKey}}" style="color:inherit;text-decoration:none;">
                 <div>
                     <object data="{{.Post.Author.Avatar}}" type="image/jpeg" style="width:50px;border-radius:50%;float:left;margin-right:10px;padding:0;">
-						<img src="http://raw.githubusercontent.com/jordanreger/htmlsky/archive/resources/avatar.png" style="width:50px;border-radius:50%;float:left;margin-right:10px;padding:0;">
+						<img src="/avatar.png" style="width:50px;border-radius:50%;float:left;margin-right:10px;padding:0;">
 					</object>
                     <p style="margin:0;">
                         <b>{{.Post.Author.DisplayName}}</b>

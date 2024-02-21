@@ -6,7 +6,7 @@
     <article style="margin-bottom:10px;">
         <div>
             <object data="{{.Post.Author.Avatar}}" type="image/jpeg" style="width:50px;border-radius:50%;float:left;margin-right:10px;padding:0;">
-                <img src="http://raw.githubusercontent.com/jordanreger/htmlsky/archive/resources/avatar.png" style="width:50px;border-radius:50%;float:left;margin-right:10px;padding:0;">
+                <img src="/avatar.png" style="width:50px;border-radius:50%;float:left;margin-right:10px;padding:0;">
             </object>
             <a href="/profile/{{.Post.Author.Handle}}" style="color:inherit;text-decoration:none;">
                 <h1 style="margin-bottom:0;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{.Post.Author.DisplayName}}</h1>
@@ -30,7 +30,7 @@
         <a href="/profile/{{.Post.Author.Handle}}/post/{{.Post.RKey}}" style="color:inherit;text-decoration:none;">
             <div>
                 <object data="{{.Post.Author.Avatar}}" type="image/jpeg" style="width:40px;border-radius:50%;float:left;margin-right:10px;">
-                    <img src="http://raw.githubusercontent.com/jordanreger/htmlsky/archive/resources/avatar.png" style="width:40px;border-radius:50%;float:left;margin-right:10px;">
+                    <img src="/avatar.png" style="width:40px;border-radius:50%;float:left;margin-right:10px;">
                 </object>
                 <p style="margin:0;">
                     <b>{{.Post.Author.DisplayName}}</b>

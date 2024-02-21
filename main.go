@@ -17,6 +17,13 @@ var public, _ = fs.Sub(publicFS, "public")
 func main() {
 	mux := http.NewServeMux()
 
+	mux.HandleFunc("/raw/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	})
+	mux.HandleFunc("/embed/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	})
+
 	// redirect if {handle} is empty
 	mux.HandleFunc("/profile/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
@@ -44,6 +51,16 @@ func main() {
 		res, _ := json.MarshalIndent(actor, "", "    ")
 
 		fmt.Fprint(w, string(res))
+	})
+	mux.HandleFunc("/embed/profile/{handle}/", func(w http.ResponseWriter, r *http.Request) {
+		handle := r.PathValue("handle")
+
+		did := getDID(handle)
+		actor := getActorProfile(did)
+		feed := getActorFeed(actor)
+		page := getActorPageEmbed(actor, feed)
+
+		fmt.Fprint(w, page)
 	})
 
 	// redirect if {post} is empty
@@ -75,6 +92,18 @@ func main() {
 		res, _ := json.MarshalIndent(getThread(at_uri), "", "    ")
 
 		fmt.Fprint(w, string(res))
+	})
+
+	mux.HandleFunc("/embed/profile/{handle}/post/{rkey}/", func(w http.ResponseWriter, r *http.Request) {
+		handle := r.PathValue("handle")
+		rkey := r.PathValue("rkey")
+
+		did := getDID(handle)
+		at_uri := getPostURI(did, rkey)
+		thread := getThread(at_uri)
+		page := getThreadPageEmbed(thread)
+
+		fmt.Fprint(w, page)
 	})
 
 	mux.Handle("/", http.FileServer(http.FS(public)))

@@ -35,20 +35,6 @@ func getActorProfile(did string) Actor {
 	return actor
 }
 
-// https://api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=did:plc:27rjcwbur2bizjjx3zakeme5
-/*
-func getActorFeed(did string) []Thread {
-	res, err := http.Get("https://api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=" + did)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	var thread Thread
-	b, _ := io.ReadAll(res.Body)
-	json.Unmarshal(b, &actor)
-}
-*/
-
 func getActorPage(actor Actor, feed Feed) string {
 	t := template.Must(template.ParseFS(publicFiles, "public/*"))
 	actor.Feed = feed

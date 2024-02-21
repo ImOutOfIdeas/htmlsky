@@ -1,3 +1,4 @@
-# HTMLSky
+# 🦋 HTMLsky
+An *HTML-only* [Bluesky](https://bsky.social) frontend.
 
-Replace `bsky` with `htmlsky` in the URL to get the HTML-only version of the page.
+Just replace `bsky.app` with `htmlsky.app`!

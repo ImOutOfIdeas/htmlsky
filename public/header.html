@@ -1,14 +1,15 @@
 {{define "actor_header"}}
-<header style="padding-top:5px;padding-left:10px;padding-right:10px;clear:both;margin-bottom:1em;">
-    <a href="https://bsky.app/profile/{{.DID}}" style="color:inherit;"><span style="float:right;font-size:1.5em;">&#8599;</span></a>
-    <a href="/" style="color:inherit;"><span style="float:left;font-size:1.5em;">&larr;</span></a>
+<header style="padding-top:10px;">
+    <a href="https://bsky.app/profile/{{.DID}}"><span style="float:right;">&#8599;</span></a>
+    <a href="/"><span style="float:left;">&#129419;</span></a>
 </header>
+<hr style="clear:both;margin-top:25px;">
 {{end}}
 
 {{define "thread_header"}}
-<header style="padding-top:5px;padding-left:10px;padding-right:10px;clear:both;margin-bottom:0.5em;">
-    <a href="https://bsky.app/profile/{{.Post.Author.DID}}/post/{{.Post.RKey}}" style="color:inherit;"><span style="float:right;font-size:1.5em;">&#8599;</span></a>
-    <a href="/" style="color:inherit;"><span style="float:left;font-size:1.5em;">&larr;</span></a>
-    <h2 style="margin:0;text-align:center;">Post</h2>
+<header style="padding-top:10px;">
+    <a href="https://bsky.app/profile/{{.Post.Author.DID}}/post/{{.Post.RKey}}/"><span style="float:right;">&#8599;</span></a>
+    <a href="/"><span style="float:left;">&#129419;</span></a>
 </header>
+<hr style="clear:both;margin-top:25px;">
 {{end}}

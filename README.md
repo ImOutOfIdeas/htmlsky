@@ -1,3 +1,3 @@
 # HTMLSky
 
-An HTML-only [Bluesky](https://bsky.social) frontend built in Go.
+Replace `bsky` with `htmlsky` in the URL to get the HTML-only version of the page.

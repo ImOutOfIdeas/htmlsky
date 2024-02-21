@@ -1,0 +1,83 @@
+package main
+
+import (
+	"embed"
+	"encoding/json"
+	"fmt"
+	"io/fs"
+	"log"
+	"net/http"
+)
+
+//go:embed all:public
+var publicFiles embed.FS
+var publicFS = fs.FS(publicFiles)
+var public, _ = fs.Sub(publicFS, "public")
+
+func main() {
+	mux := http.NewServeMux()
+
+	// redirect if {handle} is empty
+	mux.HandleFunc("/profile/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	})
+	mux.HandleFunc("/raw/profile/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	})
+
+	mux.HandleFunc("/profile/{handle}/", func(w http.ResponseWriter, r *http.Request) {
+		handle := r.PathValue("handle")
+
+		did := getDID(handle)
+		actor := getActorProfile(did)
+		feed := getActorFeed(actor)
+		page := getActorPage(actor, feed)
+
+		fmt.Fprint(w, page)
+	})
+	mux.HandleFunc("/raw/profile/{handle}/", func(w http.ResponseWriter, r *http.Request) {
+		handle := r.PathValue("handle")
+
+		did := getDID(handle)
+		actor := getActorProfile(did)
+		actor.Feed = getActorFeed(actor)
+		res, _ := json.MarshalIndent(actor, "", "    ")
+
+		fmt.Fprint(w, string(res))
+	})
+
+	// redirect if {post} is empty
+	mux.HandleFunc("/profile/{handle}/{post}/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	})
+	mux.HandleFunc("/raw/profile/{handle}/post/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	})
+
+	mux.HandleFunc("/profile/{handle}/post/{rkey}/", func(w http.ResponseWriter, r *http.Request) {
+		handle := r.PathValue("handle")
+		rkey := r.PathValue("rkey")
+
+		did := getDID(handle)
+		at_uri := getPostURI(did, rkey)
+		thread := getThread(at_uri)
+		page := getThreadPage(thread)
+
+		fmt.Fprint(w, page)
+	})
+
+	mux.HandleFunc("/raw/profile/{handle}/post/{rkey}/", func(w http.ResponseWriter, r *http.Request) {
+		handle := r.PathValue("handle")
+		rkey := r.PathValue("rkey")
+
+		did := getDID(handle)
+		at_uri := getPostURI(did, rkey)
+		res, _ := json.MarshalIndent(getThread(at_uri), "", "    ")
+
+		fmt.Fprint(w, string(res))
+	})
+
+	mux.Handle("/", http.FileServer(http.FS(public)))
+
+	log.Fatal(http.ListenAndServe(":8080", mux))
+}

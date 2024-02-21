@@ -1,0 +1,42 @@
+{{template "actor_head" .}}
+<body>
+	{{template "actor_header" .}}
+
+	<!-- user profile -->
+	<article style="border-top:none;">
+		<div style="position: relative; margin-bottom: 2.5rem;">
+			<img src="{{.Banner}}" alt="banner" style="position: relative; aspect-ratio: 3/1;" />
+			<img src="{{.Avatar}}" alt="avatar" style="width: 5em; border-radius: 50%; position: absolute; left: 1em; bottom: -2.5em;" />
+		</div>
+		<h1 style="margin-bottom: 0;">{{.DisplayName}}</h1>
+		<p style="margin: auto 0;" class="handle">@{{.Handle}}</p>
+		<p style="margin: 10px 0;" class="counts"><b>{{.FollowersCount}}</b> followers <b>{{.FollowsCount}}</b> following <b>{{.PostsCount}}</b> posts</p>
+		<p style="white-space: pre-line">{{.Description}}</p>
+	</article>
+
+	{{range .Feed}}
+    	<span id="feed"></span>
+		<article>
+			{{if ne .Post.Author.DID $.DID}}
+			<p style="margin:0;margin-left:3.5em;margin-bottom:5px;" class="repost"><b>Reposted by <a href="/profile/{{$.Handle}}" style="color:inherit;">{{$.DisplayName}}</a></b></p>
+			{{end}}
+				<a href="/profile/{{.Post.Author.Handle}}/post/{{.Post.RKey}}" style="color:inherit">
+                <div>
+                    <img src="{{.Post.Author.Avatar}}" alt="avatar" style="width: 2.5em; border-radius: 50%; float: left; margin-right: 1em; padding: 0;">
+                    <p style="margin:0;">
+                        <b>{{.Post.Author.DisplayName}}</b>
+                        <span class="handle">@{{.Post.Author.Handle}}</span>
+                        &middot;
+                        <time datetime="{{.Post.Record.CreatedAt}}" style="margin-top: 1em;" class="date">{{.Post.Record.CreatedAt.Format "1/2/2006 15:04 UTC" }}</time>
+                    </p>
+                </div>
+				<div style="margin-left: 3.5em;">
+					<p style="margin-top:5px;">{{.Post.Record.Text}}</p>
+					<p style="margin-top:20px;margin-bottom:5px;" class="counts">
+						<a href="#replies" style="color:inherit;"><b>{{.Post.ReplyCount}}</b> replies</a> &middot; <b>{{.Post.RepostCount}}</b> reposts &middot; <b>{{.Post.LikeCount}}</b> likes
+					</p>
+				</div>
+				</a>
+            </article>
+    {{end}}
+</body>

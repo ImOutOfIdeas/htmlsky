@@ -42,3 +42,7 @@ a, a:visited {
 .counts b {
     color: var(--primary);
 }
+
+img {
+    max-width: 100%;
+}

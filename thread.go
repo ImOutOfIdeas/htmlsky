@@ -22,6 +22,7 @@ type Post struct {
 	CID         string    `json:"cid"`
 	Author      Actor     `json:"author"`
 	Record      Record    `json:"record"`
+	Embed       Embed     `json:"embed"`
 	ReplyCount  int       `json:"replyCount"`
 	RepostCount int       `json:"repostCount"`
 	LikeCount   int       `json:"likeCount"`
@@ -32,15 +33,24 @@ type Post struct {
 type Record struct {
 	Text string `json:"text"`
 	Type string `json:"$type"`
-	/* jordanreger/htmlsky#7
-	Embed Embed `json:"embed"`
-	*/
+	// there's an embed here but the above embed is probably more useful
 	Langs []string `json:"langs"`
 	/* jordanreger/htmlsky#5
 	Facets []Facets `json:"Facets"`
 	*/
 	Reply     Reply     `json:"reply"`
 	CreatedAt time.Time `json:"createdAt"`
+}
+
+type Embed struct {
+	Type   string  `json:"$type"`
+	Images []Image `json:"images"`
+}
+
+type Image struct {
+	Thumb    string `json:"thumb"`
+	FullSize string `json:"fullsize"`
+	Alt      string `json:"alt"`
 }
 
 type Reply struct {

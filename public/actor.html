@@ -35,7 +35,12 @@
                 </div>
 				<div style="margin-left:60px;">
 					<p style="margin-top:5px;">{{.Post.Record.Text}}</p>
-					<p style="margin-top:20px;margin-bottom:5px;" class="counts">
+					<section>
+						{{range .Post.Embed.Images}}
+						<img src="{{.Thumb}}" alt="{{.Alt}}" style="margin-bottom:10px;">
+						{{end}}
+					</section>
+					<p style="margin-bottom:5px;" class="counts">
 						<a href="#replies" style="color:inherit;text-decoration:none;"><b>{{.Post.ReplyCount}}</b> replies</a> &middot; <b>{{.Post.RepostCount}}</b> reposts &middot; <b>{{.Post.LikeCount}}</b> likes
 					</p>
 				</div>

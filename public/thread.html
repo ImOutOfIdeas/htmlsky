@@ -14,6 +14,11 @@
             </a>
         </div>
         <p style="clear:both;">{{.Post.Record.Text}}</p>
+        <section>
+            {{range .Post.Embed.Images}}
+            <img src="{{.Thumb}}" alt="{{.Alt}}" style="margin-bottom:10px;">
+            {{end}}
+        </section>
         <time datetime="{{.Post.Record.CreatedAt}}" class="date">{{.Post.Record.CreatedAt.Format "Jan 02, 2006 at 15:04 UTC" }}</time>
 
         <p class="counts" style="margin-bottom:0;">
@@ -39,6 +44,11 @@
             </div>
             <div style="margin-left: 3.5em;">
                 <p style="margin-top:5px;">{{.Post.Record.Text}}</p>
+                <section>
+                    {{range .Post.Embed.Images}}
+                    <img src="{{.Thumb}}" alt="{{.Alt}}" style="padding-bottom:10px;">
+                    {{end}}
+                </section>
         </a>
                 <p style="margin-top:20px;margin-bottom:5px;" class="counts">
                     <a href="#replies" style="color:inherit;text-decoration:none;"><b>{{.Post.ReplyCount}}</b> replies</a> &middot; <b>{{.Post.RepostCount}}</b> reposts &middot; <b>{{.Post.LikeCount}}</b> likes

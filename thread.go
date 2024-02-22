@@ -72,7 +72,10 @@ func getThread(at_uri string) Thread {
 
 	thread := t_body.Thread
 	thread.Post.RKey = getRkey(thread.Post.URI)
+	thread.Post.Author = getActorProfile(thread.Post.Author.DID)
+
 	for i := range thread.Replies {
+		thread.Replies[i].Post.Author = getActorProfile(thread.Replies[i].Post.Author.DID)
 		thread.Replies[i].Post.RKey = getRkey(thread.Replies[i].Post.URI)
 	}
 
@@ -82,6 +85,6 @@ func getThread(at_uri string) Thread {
 func getThreadPage(thread Thread) string {
 	t := template.Must(template.ParseFS(publicFiles, "public/*"))
 	var thread_page bytes.Buffer
-	t.ExecuteTemplate(&thread_page, "thread.page.html", thread)
+	t.ExecuteTemplate(&thread_page, "thread.html", thread)
 	return thread_page.String()
 }

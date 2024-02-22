@@ -32,6 +32,16 @@ func getActorProfile(did string) Actor {
 	b, _ := io.ReadAll(res.Body)
 	json.Unmarshal(b, &actor)
 
+	if actor.DisplayName == "" {
+		actor.DisplayName = actor.Handle
+	}
+	if actor.Avatar == "" {
+		actor.Avatar = "/avatar.jpeg"
+	}
+	if actor.Banner == "" {
+		actor.Banner = "/banner.jpeg"
+	}
+
 	return actor
 }
 
@@ -39,6 +49,6 @@ func getActorPage(actor Actor, feed Feed) string {
 	t := template.Must(template.ParseFS(publicFiles, "public/*"))
 	actor.Feed = feed
 	var actor_page bytes.Buffer
-	t.ExecuteTemplate(&actor_page, "actor.page.html", actor)
+	t.ExecuteTemplate(&actor_page, "actor.html", actor)
 	return actor_page.String()
 }

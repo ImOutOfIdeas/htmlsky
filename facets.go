@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"strings"
 )
@@ -22,8 +21,6 @@ func parseFacets(text string, facets []Facet) template.HTML {
 			text = strings.Replace(text, in_txt, m_url, 1)
 		}
 	}
-
-	fmt.Println(text)
 
 	res := template.HTML(text)
 

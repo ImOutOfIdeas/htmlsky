@@ -30,7 +30,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         source: "htmlsky"
-        target: "/var/www"
+        target: "/var"
     - name: Reload service
       uses: appleboy/ssh-action@master
       with:

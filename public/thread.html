@@ -13,7 +13,9 @@
                 <p style="margin-top:0;" class="handle">@{{.Post.Author.Handle}}</p>
             </a>
         </div>
-        <p style="clear:both;">{{.Post.Record.Text}}</p>
+        <p style="clear:both;">
+            {{.Post.Record.HTML}}
+        </p>
         <section>
             {{range .Post.Embed.Images}}
             <img src="{{.Thumb}}" alt="{{.Alt}}" style="margin-bottom:10px;">
@@ -43,7 +45,9 @@
                 </p>
             </div>
             <div style="margin-left: 3.5em;">
-                <p style="margin-top:5px;">{{.Post.Record.Text}}</p>
+                <p style="margin-top:5px;">
+                    {{.Post.Record.Text}}
+                </p>
                 <section>
                     {{range .Post.Embed.Images}}
                     <img src="{{.Thumb}}" alt="{{.Alt}}" style="padding-bottom:10px;">
